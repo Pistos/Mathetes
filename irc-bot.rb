@@ -2,7 +2,6 @@ require 'silverplatter/log'
 require 'silverplatter/irc/connection'
 
 require 'mathetes'
-require 'mathetes/plugins/sample'
 
 require 'pp'
 
@@ -10,10 +9,26 @@ module Mathetes
   class IRCBot
     def initialize
       @irc = SilverPlatter::IRC::Connection.new "irc.freenode.net"
+      reset
+      puts "Initialized."
+    end
 
+    def reset
+      puts "Resetting..."
+      initialize_hooks
+      initialize_plugins
+      puts "Reset."
+    end
+
+    def initialize_hooks
       @hooks = {
         :PRIVMSG => Array.new,
       }
+    end
+
+    def initialize_plugins
+      load 'mathetes/plugins/sample.rb'
+      load 'mathetes/plugins/google-fight.rb'
 
       Plugins.constants.each do |cname|
         constant = Plugins.const_get( cname )
@@ -21,10 +36,6 @@ module Mathetes
           constant.new( self )
         end
       end
-
-      pp @hooks
-
-      puts "Initialized."
     end
 
     def start
