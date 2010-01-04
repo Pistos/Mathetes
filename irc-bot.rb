@@ -29,6 +29,7 @@ module Mathetes
     def initialize_plugins
       load 'mathetes/plugins/sample.rb'
       load 'mathetes/plugins/google-fight.rb'
+      load 'mathetes/plugins/russian-roulette.rb'
 
       Plugins.constants.each do |cname|
         constant = Plugins.const_get( cname )
