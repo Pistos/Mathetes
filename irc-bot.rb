@@ -41,6 +41,10 @@ module Mathetes
     def start
       puts "Starting... "
 
+      File.open( 'mathetes.pid', 'w' ) do |f|
+        f.puts Process.pid
+      end
+
       @irc.connect
       @irc.login( 'Mathetes2', 'Mathetes', 'Mathetes Christou' )
       @irc.send_join "#mathetes"
