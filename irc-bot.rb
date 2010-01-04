@@ -1,21 +1,49 @@
 require 'silverplatter/log'
 require 'silverplatter/irc/connection'
 
+require 'mathetes'
+require 'mathetes/plugins/sample'
+
+require 'pp'
+
 module Mathetes
   class IRCBot
     def initialize
       @irc = SilverPlatter::IRC::Connection.new "irc.freenode.net"
+
+      @hooks = {
+        :PRIVMSG => Array.new,
+      }
+
+      Plugins.constants.each do |cname|
+        constant = Plugins.const_get( cname )
+        if constant.respond_to?( :new )
+          constant.new( self )
+        end
+      end
+
+      pp @hooks
+
+      puts "Initialized."
     end
 
     def start
+      puts "Starting... "
+
       @irc.connect
       @irc.login( 'Mathetes2', 'Mathetes', 'Mathetes Christou' )
       @irc.send_join "#mathetes"
 
+      puts "Startup complete."
+
       @irc.read_loop do |message|
         case message.symbol
         when :PRIVMSG
-          handle_privmsg message
+          @hooks[ :PRIVMSG ].each do |h|
+            if h.regexp.nil? || h.regexp =~ message.text
+              h.call( h.plugin, message )
+            end
+          end
         end
       end
     end
@@ -24,11 +52,8 @@ module Mathetes
       @irc.send_privmsg( message, destination )
     end
 
-    def handle_privmsg( m )
-      case m.text
-      when /^!foo/
-        say "Foo to you!", '#mathetes'
-      end
+    def hook_privmsg( args, &block )
+      @hooks[ :PRIVMSG ] << Hooks::PRIVMSG.new( args, &block )
     end
   end
 end
