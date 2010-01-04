@@ -27,6 +27,7 @@ module Mathetes
     end
 
     def initialize_plugins
+      load 'mathetes/plugins/google.rb'
       load 'mathetes/plugins/google-fight.rb'
       load 'mathetes/plugins/memo.rb'
       load 'mathetes/plugins/russian-roulette.rb'
