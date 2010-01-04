@@ -66,8 +66,14 @@ module Mathetes
     def hook_privmsg( args, &block )
       @hooks[ :PRIVMSG ] << Hooks::PRIVMSG.new( args, &block )
     end
+
   end
 end
 
 $mathetes = Mathetes::IRCBot.new
+
+Signal.trap( 'HUP' ) do
+  $mathetes.reset
+end
+
 $mathetes.start
