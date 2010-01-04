@@ -5,7 +5,7 @@ module Mathetes
       attr_reader :regexp
 
       def initialize( args = {}, &block )
-        @regexp = args[ :regexp ] or raise "Mathetes::Hooks::PRIVMSG: Missing :regexp argument"
+        @regexp = args[ :regexp ]
         super( args, &block )
       end
     end

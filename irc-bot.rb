@@ -80,7 +80,7 @@ module Mathetes
 
     # --------------------------------------------
 
-    def hook_privmsg( args, &block )
+    def hook_privmsg( args = {}, &block )
       @hooks[ :PRIVMSG ] << Hooks::PRIVMSG.new( args, &block )
     end
 
