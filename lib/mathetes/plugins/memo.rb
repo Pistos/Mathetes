@@ -15,8 +15,6 @@ module Mathetes; module Plugins
     MAX_MEMOS_PER_PERSON = 20
     PUBLIC_READING_THRESHOLD = 2
 
-        # $reby.bind( "join", "-", "*", "on_join", "$reby_memo" )
-
     def initialize( mathetes )
       @mathetes = mathetes
       @mathetes.hook_privmsg(
@@ -120,7 +118,6 @@ module Mathetes; module Plugins
 
     def handle_join( message )
       nick = message.from.nick
-      @mathetes.say "#{nick} joined.", '#mathetes'
       memos = memos_for( nick )
       if memos.size > 0
         put "You have #{memos.size} memo(s).  Speak publicly in a channel to retrieve them.", nick
