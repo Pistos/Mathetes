@@ -19,8 +19,8 @@ module Mathetes; module Plugins
     def initialize( mathetes )
       mathetes.hook_privmsg(
         :regexp => /^!(googlefight|gf)\b/
-      ) do |plugin,message|
-        plugin.handle_privmsg message
+      ) do |message|
+        handle_privmsg message
       end
     end
 

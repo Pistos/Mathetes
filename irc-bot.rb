@@ -56,7 +56,7 @@ module Mathetes
         when :PRIVMSG
           @hooks[ :PRIVMSG ].each do |h|
             if h.regexp.nil? || h.regexp =~ message.text
-              h.call( h.plugin, message )
+              h.call( message )
             end
           end
         end
