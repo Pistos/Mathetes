@@ -84,6 +84,12 @@ module Mathetes
       @hooks[ :PRIVMSG ] << Hooks::PRIVMSG.new( args, &block )
     end
 
+    def hook_join( &block )
+      @irc.subscribe( :JOIN ) do |listener,message|
+        block.call( listener, message )
+      end
+    end
+
   end
 end
 
