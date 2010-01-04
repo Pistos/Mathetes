@@ -5,7 +5,7 @@ module Mathetes
       attr_reader :plugin
 
       def initialize( args = {}, &block )
-        @plugin = args[ :plugin ] or raise "Mathetes::Hooks: Missing :plugin argument"
+        @plugin = eval( "self", block.binding )
         @block = block
       end
 

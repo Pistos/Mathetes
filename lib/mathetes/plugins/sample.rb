@@ -2,7 +2,6 @@ module Mathetes; module Plugins
   class Sample
     def initialize( mathetes )
       mathetes.hook_privmsg(
-        :plugin => self,
         :regexp => /^!foo\b/
       ) do |plugin,message|
         plugin.handle_privmsg message
