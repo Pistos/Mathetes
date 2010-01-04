@@ -15,14 +15,23 @@ module Mathetes
 
     def reset
       puts "Resetting..."
+      unsubscribe_listeners
       initialize_hooks
       initialize_plugins
       puts "Reset."
     end
 
+    def unsubscribe_listeners
+      return  if @hooks.nil?
+      @hooks[ :JOIN ].each do |hook|
+        @irc.unsubscribe hook
+      end
+    end
+
     def initialize_hooks
       @hooks = {
         :PRIVMSG => Array.new,
+        :JOIN => Array.new,
       }
     end
 
@@ -88,9 +97,10 @@ module Mathetes
     end
 
     def hook_join( &block )
-      @irc.subscribe( :JOIN ) do |listener,message|
+      listener = @irc.subscribe( :JOIN ) do |listener,message|
         block.call( listener, message )
       end
+      @hooks[ :JOIN ] << listener
     end
 
   end
