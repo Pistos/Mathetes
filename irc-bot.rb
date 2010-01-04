@@ -63,9 +63,21 @@ module Mathetes
       end
     end
 
+    # --------------------------------------------
+
     def say( message, destination )
       @irc.send_privmsg( message, destination )
     end
+
+    def ban( *args )
+      @irc.send_ban *args
+    end
+
+    def kick( *args )
+      @irc.send_kick *args
+    end
+
+    # --------------------------------------------
 
     def hook_privmsg( args, &block )
       @hooks[ :PRIVMSG ] << Hooks::PRIVMSG.new( args, &block )
