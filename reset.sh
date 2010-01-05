@@ -1,1 +1,1 @@
-kill -s SIGHUP `cat mathetes.pid`
+kill -s HUP `cat mathetes.pid`
