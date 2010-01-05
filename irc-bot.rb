@@ -7,6 +7,19 @@ require 'pp'
 
 Thread.abort_on_exception = true
 
+def escape_quotes( s )
+  temp = ""
+  s.each_byte do |b|
+    if b == 39
+      temp << 39
+      temp << 92
+      temp << 39
+    end
+    temp << b
+  end
+  temp
+end
+
 module Mathetes
   class IRCBot
     def initialize
