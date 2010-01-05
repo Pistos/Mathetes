@@ -15,10 +15,20 @@ module Mathetes
 
     def reset
       puts "Resetting..."
+      kill_threads
       unsubscribe_listeners
       initialize_hooks
       initialize_plugins
       puts "Reset."
+    end
+
+    def kill_threads
+      if @threads
+        @threads.each do |t|
+          t.kill
+        end
+      end
+      @threads = Array.new
     end
 
     def unsubscribe_listeners
@@ -104,6 +114,14 @@ module Mathetes
         block.call( listener, message )
       end
       @hooks[ :JOIN ] << listener
+    end
+
+    def new_thread( &block )
+      t = Thread.new do
+        block.call
+      end
+      @threads << t
+      t
     end
 
   end
