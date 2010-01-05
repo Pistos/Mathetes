@@ -55,6 +55,7 @@ module Mathetes
       load 'mathetes/plugins/pun.rb'
       load 'mathetes/plugins/russian-roulette.rb'
       load 'mathetes/plugins/sample.rb'
+      load 'mathetes/plugins/twitter.rb'
 
       Plugins.constants.each do |cname|
         constant = Plugins.const_get( cname )
