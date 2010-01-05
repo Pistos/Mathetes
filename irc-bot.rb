@@ -61,6 +61,7 @@ module Mathetes
     end
 
     def initialize_plugins
+      load 'mathetes/plugins/convert.rb'
       load 'mathetes/plugins/dictionary.rb'
       load 'mathetes/plugins/down-for-me.rb'
       load 'mathetes/plugins/etymology.rb'
