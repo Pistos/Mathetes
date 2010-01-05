@@ -5,6 +5,8 @@ require 'mathetes'
 
 require 'pp'
 
+Thread.abort_on_exception = true
+
 module Mathetes
   class IRCBot
     def initialize
