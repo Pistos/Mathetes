@@ -2,6 +2,7 @@ require 'silverplatter/log'
 require 'silverplatter/irc/connection'
 
 require 'mathetes'
+require 'yaml'
 
 require 'pp'
 
@@ -24,6 +25,7 @@ module Mathetes
   class IRCBot
     def initialize
       @irc = SilverPlatter::IRC::Connection.new "irc.freenode.net"
+      @conf = YAML.load_file 'mathetes-config.yaml'
       reset
       puts "Initialized."
     end
@@ -93,8 +95,10 @@ module Mathetes
       end
 
       @irc.connect
-      @irc.login( 'Mathetes2', 'Mathetes', 'Mathetes Christou' )
-      @irc.send_join "#mathetes"
+      @irc.login( @conf[ 'nick' ], 'Mathetes', 'Mathetes Christou' )
+      @conf[ 'channels' ].each do |channel|
+        @irc.send_join channel
+      end
 
       puts "Startup complete."
 
