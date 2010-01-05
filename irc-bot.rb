@@ -75,6 +75,7 @@ module Mathetes
       load 'mathetes/plugins/sample.rb'
       load 'mathetes/plugins/spell.rb'
       load 'mathetes/plugins/twitter.rb'
+      load 'mathetes/plugins/url-summary.rb'
 
       Plugins.constants.each do |cname|
         constant = Plugins.const_get( cname )
