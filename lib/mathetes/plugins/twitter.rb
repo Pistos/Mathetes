@@ -17,12 +17,11 @@ module Mathetes; module Plugins
       'ramazetest' => [ '#mathetes', ],
     }
     SEARCHES = {
-      # 'ramaze' => [ '#ramaze', ],
-      # 'ruby dbi' => [ '#ruby-dbi', ],
-      # 'webbynode' => [ '#webbynode', ],
-      # 'rvm -rain -treadmill -running -qualifiers -weather -car -"the rvm" -victoria -marathon -skate -shoe' => [ '#rvm', ],
-      # 'nanoc -from:virtualdjradio' => [ '#nanoc', ],
-      '#haiku' => [ '#mathetes', ],
+      'ramaze' => [ '#ramaze', ],
+      'ruby dbi' => [ '#ruby-dbi', ],
+      'webbynode' => [ '#webbynode', ],
+      'rvm -rain -treadmill -running -qualifiers -weather -car -"the rvm" -victoria -marathon -skate -shoe' => [ '#rvm', ],
+      'nanoc -from:virtualdjradio' => [ '#nanoc', ],
     }
 
     def initialize( mathetes )
