@@ -68,6 +68,7 @@ module Mathetes
       load 'mathetes/plugins/github-hook.rb'
       load 'mathetes/plugins/google.rb'
       load 'mathetes/plugins/google-fight.rb'
+      load 'mathetes/plugins/kicker.rb'
       load 'mathetes/plugins/memo.rb'
       load 'mathetes/plugins/pun.rb'
       load 'mathetes/plugins/russian-roulette.rb'
