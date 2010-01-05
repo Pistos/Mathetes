@@ -51,6 +51,7 @@ module Mathetes
       load 'mathetes/plugins/dictionary.rb'
       load 'mathetes/plugins/down-for-me.rb'
       load 'mathetes/plugins/etymology.rb'
+      load 'mathetes/plugins/github-hook.rb'
       load 'mathetes/plugins/google.rb'
       load 'mathetes/plugins/google-fight.rb'
       load 'mathetes/plugins/memo.rb'
