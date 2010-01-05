@@ -25,7 +25,6 @@ module Mathetes
   class IRCBot
     def initialize
       @irc = SilverPlatter::IRC::Connection.new "irc.freenode.net"
-      @conf = YAML.load_file 'mathetes-config.yaml'
       reset
       puts "Initialized."
     end
@@ -35,6 +34,7 @@ module Mathetes
 
       kill_threads
       unsubscribe_listeners
+      @conf = YAML.load_file 'mathetes-config.yaml'
       initialize_hooks
       initialize_plugins
 
@@ -65,21 +65,9 @@ module Mathetes
     end
 
     def initialize_plugins
-      load 'mathetes/plugins/convert.rb'
-      load 'mathetes/plugins/dictionary.rb'
-      load 'mathetes/plugins/down-for-me.rb'
-      load 'mathetes/plugins/etymology.rb'
-      load 'mathetes/plugins/github-hook.rb'
-      load 'mathetes/plugins/google.rb'
-      load 'mathetes/plugins/google-fight.rb'
-      load 'mathetes/plugins/kicker.rb'
-      load 'mathetes/plugins/memo.rb'
-      load 'mathetes/plugins/pun.rb'
-      load 'mathetes/plugins/russian-roulette.rb'
-      load 'mathetes/plugins/sample.rb'
-      load 'mathetes/plugins/spell.rb'
-      load 'mathetes/plugins/twitter.rb'
-      load 'mathetes/plugins/url-summary.rb'
+      @conf[ 'plugins' ].each do |plugin|
+        load "mathetes/plugins/#{plugin}.rb"
+      end
 
       Plugins.constants.each do |cname|
         constant = Plugins.const_get( cname )
