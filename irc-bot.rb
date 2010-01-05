@@ -122,7 +122,12 @@ module Mathetes
 
     def new_thread( &block )
       t = Thread.new do
-        block.call
+        begin
+          block.call
+        rescue Exception => e
+          $stderr.puts "Exception in thread: #{e}"
+          $stderr.puts e.backtrace.join( "\n\t" )
+        end
       end
       @threads << t
       t
