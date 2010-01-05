@@ -98,6 +98,7 @@ module Mathetes; module Plugins
           nick = message.from.nick
           speech = message.text
           channel = message.channel
+          throw :done  if channel.nil?
           throw :done  if ! CHANNELS.find { |c| c.downcase == channel.name.downcase }
 
           WATCHLIST.each do |watch_nick, watchlist|
