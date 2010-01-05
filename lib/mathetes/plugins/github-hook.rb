@@ -27,6 +27,7 @@ module Mathetes; module Plugins
       'innate'                  => [ '#mathetes', '#ramaze', ],
       'linistrac'               => [ '#mathetes', '#ramaze', ],
       'm4dbi'                   => [ '#mathetes', '#ruby-dbi', ],
+      'Mathetes'                => [ '#mathetes', ],
       'nanoc'                   => [ '#nanoc', ],
       'nagoro'                  => [ '#mathetes', '#ramaze' ],
       'Ramalytics'              => [ '#mathetes', '#ramaze' ],
