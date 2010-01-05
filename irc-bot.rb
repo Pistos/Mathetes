@@ -32,10 +32,12 @@ module Mathetes
 
     def reset
       puts "Resetting..."
+
       kill_threads
       unsubscribe_listeners
       initialize_hooks
       initialize_plugins
+
       puts "Reset."
     end
 
@@ -96,8 +98,12 @@ module Mathetes
 
       @irc.connect
       @irc.login( @conf[ 'nick' ], 'Mathetes', 'Mathetes Christou' )
+      @irc.send_privmsg "IDENTIFY #{ @conf[ 'password' ] }", 'NickServ'
       @conf[ 'channels' ].each do |channel|
-        @irc.send_join channel
+        @irc.send_join channel[ 'name' ]
+        if channel[ 'ops' ]
+          @irc.send_privmsg "OP #{ channel[ 'name' ] }", 'ChanServ'
+        end
       end
 
       puts "Startup complete."
