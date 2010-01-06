@@ -6,7 +6,7 @@ module Mathetes; module Plugins
     NUM_SUGGESTIONS = 15
 
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^;spell\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^!spell\b/ ) do |message|
         catch :done do
           rest = message.text[ /^\S+\s+(.*)/, 1 ]
           if rest.nil?

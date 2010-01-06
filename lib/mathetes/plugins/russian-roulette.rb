@@ -20,7 +20,7 @@ module Mathetes; module Plugins
     def initialize( mathetes )
       @mathetes = mathetes
       @mathetes.hook_privmsg(
-        :regexp => /^!roul\b/
+        :regexp => /^!roul(ette)?\b/
       ) do |message|
         pull_trigger message
       end

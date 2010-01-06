@@ -13,7 +13,7 @@ module Mathetes; module Plugins
 
   class Converter
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^;(conv(ert)?|calc)\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^!(conv(ert)?|calc)\b/ ) do |message|
         arg = CGI.escape( message.text[ /^\S+\s+(.*)/, 1 ] )
         open( "http://www.google.com/search?q=#{ arg }" ) do |html|
           answered = false

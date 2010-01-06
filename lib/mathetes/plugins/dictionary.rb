@@ -6,7 +6,7 @@ module Mathetes; module Plugins
   class Dictionary
 
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^;d(ict)?\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^!d(ict)?\b/ ) do |message|
         catch :done do
           arg = CGI.escape( message.text[ /^\S+\s+(.*)/, 1 ] )
           doc = Nokogiri::HTML(

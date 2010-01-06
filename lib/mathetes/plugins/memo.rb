@@ -18,7 +18,7 @@ module Mathetes; module Plugins
     def initialize( mathetes )
       @mathetes = mathetes
       @mathetes.hook_privmsg(
-        :regexp => /^;memo\b/
+        :regexp => /^!memo\b/
       ) do |message|
         record_memo message
       end

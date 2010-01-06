@@ -7,7 +7,7 @@ module Mathetes; module Plugins
   class Etymology
 
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^;etym(ology)?\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^!etym(ology)?\b/ ) do |message|
         terms = message.text[ /^\S+\s+(.*)/, 1 ]
         arg = CGI.escape( terms )
 

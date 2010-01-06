@@ -8,7 +8,7 @@ module Mathetes; module Plugins
     MAX_RESULTS = 5
 
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^;g(oogle)?\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^!g(oogle)?\b/ ) do |message|
         args = message.text[ /^\S+\s+(.*)/, 1 ]
         nick = message.from.nick
 

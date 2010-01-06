@@ -7,7 +7,7 @@ module Mathetes; module Plugins
   class DownForMe
 
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^;(up|down)\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^(!(up|down)|(up|down)\?)\b/ ) do |message|
         terms = message.text[ /^\S+\s+(.*)/, 1 ]
         site = terms.downcase[ /([a-z0-9.-]+)($|\/)/, 1 ]
         doc = Nokogiri::HTML( open( "http://downforeveryoneorjustme.com/#{site}" ) )
