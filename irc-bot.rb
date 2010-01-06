@@ -131,6 +131,10 @@ module Mathetes
       @irc.send_kick *args
     end
 
+    def nick
+      @conf[ 'nick' ]
+    end
+
     # --------------------------------------------
 
     def hook_privmsg( args = {}, &block )
