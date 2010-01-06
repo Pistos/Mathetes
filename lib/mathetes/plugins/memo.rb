@@ -120,7 +120,7 @@ module Mathetes; module Plugins
       nick = message.from.nick
       memos = memos_for( nick )
       if memos.size > 0
-        put "You have #{memos.size} memo(s).  Speak publicly in a channel to retrieve them.", nick
+        @mathetes.say "You have #{memos.size} memo(s).  Speak publicly in a channel to retrieve them.", nick
       end
     end
 
