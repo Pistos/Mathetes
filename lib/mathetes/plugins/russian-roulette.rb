@@ -15,7 +15,7 @@ module Mathetes; module Plugins
         "That's gotta hurt...",
     ]
     ALSO_BAN = true
-    BAN_TIME = 1 # minutes
+    BAN_TIME = 60 # seconds
 
     def initialize( mathetes )
       @mathetes = mathetes
@@ -34,13 +34,11 @@ module Mathetes; module Plugins
         message.answer "-click-"
       else
         if ALSO_BAN
-          # @mathetes.ban(
-            # message.channel,
-            # message.from.nick,
-            # "RussianRoulette",
-            # "Russian Roulette; for #{BAN_TIME} minute(s).",
-            # BAN_TIME
-          # )
+          @mathetes.ban(
+            message.from,
+            message.channel,
+            BAN_TIME
+          )
         end
 
         @mathetes.kick(
