@@ -119,8 +119,12 @@ module Mathetes
       @irc.send_privmsg( message, destination )
     end
 
-    def ban( *args )
-      @irc.send_ban *args
+    def ban( user, channel, seconds = 24 * 60 * 60 )
+      @irc.send_raw( 'MODE', channel, '+b', user.hostmask.to_s )
+      Thread.new do
+        sleep seconds
+        @irc.send_raw( 'MODE', channel, '-b', user.hostmask.to_s )
+      end
     end
 
     def kick( *args )
