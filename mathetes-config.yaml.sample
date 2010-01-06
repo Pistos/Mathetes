@@ -1,0 +1,26 @@
+---
+nick: Mathetes
+password: 'thesecretpassword'
+channels:
+    - name: '#mathetes'
+      ops: true
+    - name: '#ramaze'
+plugins:
+    - chanstats
+    - convert
+    - dictionary
+    - down-for-me
+    - etymology
+    - github-hook
+    - google
+    - google-fight
+    - kicker
+    - last-spoke
+    - memo
+    - pun
+    - rss
+    - russian-roulette
+    - sample
+    - spell
+    - twitter
+    - url-summary
