@@ -66,7 +66,12 @@ module Mathetes
 
     def initialize_plugins
       @conf[ 'plugins' ].each do |plugin|
-        load "mathetes/plugins/#{plugin}.rb"
+        begin
+          load "mathetes/plugins/#{plugin}.rb"
+        rescue Exception => e
+          $stderr.puts "Plugin load error: #{e.message}"
+          $stderr.puts e.backtrace.join( "\n\t" )
+        end
       end
 
       Plugins.constants.each do |cname|
