@@ -143,7 +143,7 @@ module Mathetes
 
     def hook_join( &block )
       listener = @irc.subscribe( :JOIN ) do |listener,message|
-        block.call( listener, message )
+        block.call( message )
       end
       @hooks[ :JOIN ] << listener
     end

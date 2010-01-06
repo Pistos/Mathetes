@@ -25,7 +25,7 @@ module Mathetes; module Plugins
       @mathetes.hook_privmsg do |message|
         handle_privmsg message
       end
-      @mathetes.hook_join do |listener,message|
+      @mathetes.hook_join do |message|
         handle_join message
       end
 
