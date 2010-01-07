@@ -116,7 +116,7 @@ module Mathetes; module Plugins
     end
 
     def handle_privmsg( message )
-      return  if CHANNEL_BLACKLIST.include?( message.channel.name )
+      return  if message.channel && CHANNEL_BLACKLIST.include?( message.channel.name )
 
       nick = message.from.nick
       speech = message.text
