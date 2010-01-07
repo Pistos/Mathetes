@@ -34,9 +34,11 @@ module Mathetes
 
       kill_threads
       unsubscribe_listeners
+      parted = part_channels
       @conf = YAML.load_file 'mathetes-config.yaml'
       initialize_hooks
       initialize_plugins
+      join_channels parted
 
       puts "Reset."
     end
@@ -55,6 +57,14 @@ module Mathetes
       @hooks[ :JOIN ].each do |hook|
         @irc.unsubscribe hook
       end
+    end
+
+    def part_channels
+      if @irc.connected?
+        channels = @irc.channels.channels
+        @irc.send_part 'Parting.', *channels
+      end
+      channels || []
     end
 
     def initialize_hooks
@@ -79,6 +89,12 @@ module Mathetes
         if constant.respond_to?( :new )
           constant.new( self )
         end
+      end
+    end
+
+    def join_channels( channels = [] )
+      channels.each do |c|
+        @irc.send_join c.name
       end
     end
 
