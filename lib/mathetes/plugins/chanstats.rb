@@ -44,7 +44,7 @@ module Mathetes; module Plugins
 
     def on_join( message )
       channel = message.channel.name
-      members = message.channel.users
+      members = message.channel.users.map { |u| u.nick }
       n = members.size
       cs = set_defaults( channel )
       if n > cs[ :size_record ]
