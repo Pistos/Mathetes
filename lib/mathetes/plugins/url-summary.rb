@@ -150,7 +150,10 @@ module Mathetes; module Plugins
         s = "[\00300github\003] [#{project}] <#{author}> #{commit_message} {+#{number_files[ :added ]}/-#{number_files[ :removed ]}/*#{number_files[ :modified ]}}"
         message.answer s
       when %r|(http://(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]+(?:/[0-9a-zA-Z#{"\303\244-\303\256"}~!@#%&./?=_+-]*)?)|u
-        message.answer summarize_url( $1 )
+        summary = summarize_url( $1 )
+        if summary
+          message.answer
+        end
       end
     end
   end
