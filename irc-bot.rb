@@ -24,7 +24,10 @@ end
 module Mathetes
   class IRCBot
     def initialize
-      @irc = SilverPlatter::IRC::Connection.new "irc.freenode.net"
+      @irc = SilverPlatter::IRC::Connection.new(
+        "irc.freenode.net",
+        :log => SilverPlatter::Log.to_console( :formatter => SilverPlatter::Log::ColoredDebugConsole )
+      )
       reset
       puts "Initialized."
     end
