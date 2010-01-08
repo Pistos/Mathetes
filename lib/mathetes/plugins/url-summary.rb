@@ -126,6 +126,7 @@ module Mathetes; module Plugins
         %r{http://pastebin},
         %r{http://github\.com/.*/blob},
         %r{http://gist\.github\.com},
+        %r{http://www\.flickr\.com/photos},
         %r{http://\d+\.\d+\.\d+\.\d+}
         # Blacklist; swallow and discard
       when %r{twitter\.com/\w+/status(?:es)?/(\d+)}
