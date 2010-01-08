@@ -61,6 +61,7 @@ module Mathetes; module Plugins
     end
 
     def handle_privmsg( message )
+      return  if message.channel.nil?
       nick = message.from.nick
       if ! IGNORED.include?( nick )
         @last_spoke.transaction do
