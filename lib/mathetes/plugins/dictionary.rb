@@ -28,6 +28,7 @@ module Mathetes; module Plugins
 
           tables = doc.search( 'table[cellspacing="0"][border="0"][cellpadding="2"][width="100%"]' )
           maintable = tables.find { |t| t[ 'align' ].nil? && t[ 'bgcolor' ].nil? }
+          throw :done  if maintable.nil?
           wordtag = maintable.at( 'div.headword' )
           if wordtag
             word = wordtag.children.find_all { |x| x.text? }.map { |t| t.to_s }.join
