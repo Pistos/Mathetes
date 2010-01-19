@@ -176,7 +176,7 @@ module Mathetes
         begin
           block.call
         rescue Exception => e
-          $stderr.puts "Exception in thread: #{e}"
+          $stderr.puts "Exception in thread: #{e.class}: #{e}"
           $stderr.puts e.backtrace.join( "\n\t" )
         end
       end
