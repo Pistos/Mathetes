@@ -98,6 +98,10 @@ module Mathetes
     def join_channels( channels = [] )
       channels.each do |c|
         @irc.send_join c.name
+        channel = @conf[ 'channels' ].find { |ch| ch[ 'name' ] == c.name }
+        if channel && channel[ 'ops' ]
+          @irc.send_privmsg "OP #{ channel[ 'name' ] }", 'ChanServ'
+        end
       end
     end
 
