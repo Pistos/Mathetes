@@ -152,7 +152,7 @@ module Mathetes; module Plugins
       when %r|(http://(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]+(?:/[0-9a-zA-Z#{"\303\244-\303\256"}~!@#%&./?=_+-]*)?)|u
         summary = summarize_url( $1 )
         if summary
-          message.answer
+          message.answer summary
         end
       end
     end
