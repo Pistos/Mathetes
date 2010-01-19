@@ -69,7 +69,7 @@ module Mathetes; module Plugins
           fetch url
         end
       rescue EOFError, ByteLimitExceededException
-        $stderr.puts "[\00300URL\003] Byte limit reached reading #{url} (document reached #{@doc_text.length} bytes)"
+        # > /dev/null
       end
 
       doc = Nokogiri::HTML( @doc_text )
