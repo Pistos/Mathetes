@@ -92,7 +92,7 @@ module Mathetes; module Plugins
       return  if IGNORED.include?( nick )
 
       memos = memos_for( nick )
-      if memos.size <= PUBLIC_READING_THRESHOLD
+      if memos.size <= PUBLIC_READING_THRESHOLD && message.channel
         dest = message.channel.name
       else
         dest = nick
