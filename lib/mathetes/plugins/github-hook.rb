@@ -41,6 +41,7 @@ module Mathetes; module Plugins
       'rvm'                     => [ '#rvm', ],
       'selfmarks'               => [ '#mathetes', ],
       'sociar'                  => [ '#ramaze' ],
+      'Thankful-Eyes'           => [ '#mathetes', ],
       'ver'                     => [ '#ver' ],
       'watir-mirror'            => [ '#mathetes', '#watir' ],
       'weewar-ai'               => [ '#mathetes' ],
