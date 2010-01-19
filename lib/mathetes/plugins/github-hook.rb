@@ -59,6 +59,8 @@ module Mathetes; module Plugins
 
     def zepto_url( url )
       URI.parse( 'http://zep.purepistos.net/zep/1?uri=' + CGI.escape( url ) ).read
+    rescue
+      # (return nil)
     end
 
     def receive_data( data )
