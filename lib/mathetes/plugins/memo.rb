@@ -118,6 +118,8 @@ module Mathetes; module Plugins
 
     def handle_join( message )
       nick = message.from.nick
+      return  if IGNORED.include?( nick )
+
       memos = memos_for( nick )
       if memos.size > 0
         @mathetes.say "You have #{memos.size} memo(s).  Speak publicly in a channel to retrieve them.", nick
