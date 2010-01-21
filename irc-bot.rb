@@ -2,8 +2,8 @@ require 'silverplatter/log'
 require 'silverplatter/irc/connection'
 
 require 'mathetes'
+require 'traited'
 require 'yaml'
-
 require 'pp'
 
 Thread.abort_on_exception = true
