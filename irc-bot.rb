@@ -73,6 +73,7 @@ module Mathetes
     def initialize_hooks
       @hooks = {
         :PRIVMSG => Array.new,
+        :NOTICE => Array.new,
         :JOIN => Array.new,
       }
     end
@@ -126,8 +127,8 @@ module Mathetes
 
       @irc.read_loop do |message|
         case message.symbol
-        when :PRIVMSG
-          @hooks[ :PRIVMSG ].each do |h|
+        when :PRIVMSG, :NOTICE
+          @hooks[ message.symbol ].each do |h|
             if h.regexp.nil? || h.regexp =~ message.text
               h.call( message )
             end
@@ -159,6 +160,10 @@ module Mathetes
     end
 
     # --------------------------------------------
+
+    def hook_notice( args = {}, &block )
+      @hooks[ :NOTICE ] << Hooks::NOTICE.new( args, &block )
+    end
 
     def hook_privmsg( args = {}, &block )
       @hooks[ :PRIVMSG ] << Hooks::PRIVMSG.new( args, &block )
