@@ -119,8 +119,9 @@ module Mathetes; module Plugins
       return  if message.channel && CHANNEL_BLACKLIST.include?( message.channel.name )
 
       nick = message.from.nick
-      speech = message.text
+      return  if ! NickInfo.identified?( nick )
 
+      speech = message.text
       case speech
       when %r{http://pastie},
         %r{http://pastebin},
