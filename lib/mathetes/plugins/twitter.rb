@@ -21,7 +21,7 @@ module Mathetes; module Plugins
       'ruby dbi' => [ '#ruby-dbi', ],
       'webbynode' => [ '#webbynode', ],
       'rvm -rain -treadmill -running -qualifiers -weather -car -"the rvm" -victoria -marathon -skate -shoe' => [ '#rvm', ],
-      'nanoc -from:virtualdjradio' => [ '#nanoc', ],
+      'nanoc -moritaya -virtualdjradio' => [ '#nanoc', ],
     }
 
     def initialize( mathetes )
