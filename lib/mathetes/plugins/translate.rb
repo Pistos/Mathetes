@@ -8,7 +8,8 @@ module Mathetes; module Plugins
 
     # @return The two-letter language code of the language
     def self.detect( s )
-      google_response = open( "http://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q=#{CGI.escape(s)}" ) { |h| h.read }
+      text = CGI.escape( s ).gsub( '+', '%20' )
+      google_response = open( "http://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q=#{text}" ) { |h| h.read }
       r = JSON.parse( google_response )
       if r.nil?
         $stderr.puts "Failed to parse JSON for: #{google_response.inspect}"
@@ -20,7 +21,9 @@ module Mathetes; module Plugins
 
     # @return The translated text.
     def self.translate( s, lang_source, lang_dest = 'en' )
-      google_response = open( "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&langpair=#{lang_source}%7C#{lang_dest}&q=#{CGI.escape(s)}" ) { |h| h.read }
+      text = CGI.escape( s ).gsub( '+', '%20' )
+      url = "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&langpair=#{lang_source}%7C#{lang_dest}&q=#{text}"
+      google_response = open( url ) { |h| h.read }
       r = JSON.parse( google_response )
       if r.nil?
         $stderr.puts "Failed to parse JSON for: #{google_response.inspect}"
@@ -32,14 +35,12 @@ module Mathetes; module Plugins
 
     def initialize( mathetes )
       mathetes.hook_privmsg( :regexp => /^!tr(?:ans(?:late)?)?\b/ ) do |message|
-        if message.text =~ /^!tr.* ([a-zA-Z-]{2,5}) ([a-zA-Z-]{2,5}) (.+)/
+        if message.text =~ /^!tr\S* ([a-zA-Z-]{2,5}) ([a-zA-Z-]{2,5}) (.+)/
           src, dest, text = $1, $2, $3
           translation = Translate.translate( text, src, dest )
           if translation
             message.answer "[tr] #{translation}"
           end
-        else
-          $stderr.puts "message doesn't match: #{message.text.inspect}"
         end
       end
     end
