@@ -16,13 +16,14 @@ Pull in some requirements:
 
     git clone git://github.com/apeiros/silverplatter-log.git
 
-We also need to install some gems:
+The plugins have dependencies:
 
-    sudo gem install eventmachine
-    sudo gem install mash -v 0.0.3
-    sudo gem install httparty -v 0.4.3
-    sudo gem install m4dbi
-    sudo gem install dbd-pg
+    gem install eventmachine
+    gem install mash -v 0.0.3
+    gem install httparty -v 0.4.3
+    gem install m4dbi
+    gem install dbd-pg
+    gem install nokogiri
 
 ## Configuring
 
@@ -37,3 +38,8 @@ If you're going to use the Twitter plugin you also need to configure it:
 ## Running
 
     ruby -rubygems -Ipath/to/silverplatter-irc/lib -Ipath/to/silverplatter-log/lib -Ilib irc-bot.rb
+
+## Support
+
+Come visit me (Pistos) on FreeNode in the #mathetes channel, or report issues at
+http://github.com/Pistos/Mathetes/issues .
