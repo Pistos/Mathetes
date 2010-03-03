@@ -20,8 +20,8 @@ module Mathetes; module Plugins
       'ramaze' => [ '#ramaze', ],
       'ruby dbi' => [ '#ruby-dbi', ],
       'webbynode' => [ '#webbynode', ],
-      'rvm -rain -treadmill -running -qualifiers -weather -car -"the rvm" -victoria -marathon -skate -shoe' => [ '#rvm', ],
-      'nanoc -from:virtualdjradio' => [ '#nanoc', ],
+      'rvm -rain -treadmill -running -qualifiers -weather -car -"the rvm" -victoria -marathon -skate -shoe -@h4rvm1' => [ '#rvm', ],
+      'nanoc -moritaya -virtualdjradio' => [ '#nanoc', ],
     }
 
     def initialize( mathetes )
@@ -118,6 +118,10 @@ module Mathetes; module Plugins
         if ! @seen[ channel ].include?( tweet_id )
           @mathetes.say alert, channel
           @seen[ channel ] << tweet_id
+          lang, tr = translate( text )
+          if lang && tr
+            @mathetes.say "[\00300twitter\003] (#{lang}) <#{src}> #{tr}", channel
+          end
         end
       end
     end
@@ -131,9 +135,23 @@ module Mathetes; module Plugins
         if ! @seen[ channel ].include?( tweet_id )
           @mathetes.say alert, channel
           @seen[ channel ] << tweet_id
+          lang, tr = translate( text )
+          if lang && tr
+            @mathetes.say "[\00300twitter\003] (#{lang}) <#{src}> #{tr}", channel
+          end
         end
       end
     end
+
+    def translate( s )
+      return  if ! defined? Mathetes::Plugins::Translate
+      lang_source = Translate.detect s
+      if lang_source && lang_source != 'en'
+        tr = Translate.translate( s, lang_source )
+        [ lang_source, tr ]
+      end
+    end
+
   end
 
 end; end

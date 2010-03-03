@@ -28,7 +28,6 @@ module Mathetes; module Plugins
       'linistrac'               => [ '#mathetes', '#ramaze', ],
       'm4dbi'                   => [ '#mathetes', '#ruby-dbi', ],
       'Mathetes'                => [ '#mathetes', ],
-      'nanoc'                   => [ '#nanoc', ],
       'nagoro'                  => [ '#mathetes', '#ramaze' ],
       'Ramalytics'              => [ '#mathetes', '#ramaze' ],
       'Reby'                    => [ '#mathetes', ],
@@ -52,7 +51,7 @@ module Mathetes; module Plugins
       @seen ||= Hash.new
       s = ( @seen[ destination ] ||= Hash.new )
       if ! s[ rev ]
-        $mathetes.say( message, destination )
+        $mathetes.say( message.gsub( "\n", ' ' ), destination )
         s[ rev ] = true
       end
     end
