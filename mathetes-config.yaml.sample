@@ -1,5 +1,5 @@
 ---
-nick: Mathetes
+nick: YourBotsNick
 password: 'thesecretpassword'
 channels:
     - name: '#mathetes'
@@ -18,7 +18,7 @@ plugins:
   - google
   - kicker
   - last-spoke
-  # needs a database & table
+  # needs a database
   # - memo
   - nick-info
   - pun
