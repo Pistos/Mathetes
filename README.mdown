@@ -7,12 +7,15 @@ Clone the repository:
 Pull in some requirements:
 
 [silverplatter-irc](http://github.com/apeiros/silverplatter-irc)
+
   git clone git://github.com/apeiros/silverplatter-irc.git ~/code/Mathetes/external/silverplatter-irc
   
 [silverplatter-log](git://github.com/apeiros/silverplatter-irc.git)
+
   git clone git://github.com/apeiros/silverplatter-log.git ~/code/Mathetes/external/silverplatter-log
   
 [mvfeed](http://gist.github.com/40396)
+
   git clone git://gist.github.com/40396.git ~/code/Mathetes/external/mvfeed
   
 
