@@ -30,49 +30,10 @@ We also need to install some gems:
 
 You'll want to change things like nick, password and channels for starters.
 
-    ---
-      nick: your_bot
-      password: 'thesecretpassword'
-      channels:
-          - name: '#some_channel'
-            ops: true
-          - name: '#some_other_channel'
-      plugins:
-        - channel-util
-        # broken atm
-        # - chanstats
-        - convert
-        - dictionary
-        - down-for-me
-        - etymology
-        - github-hook
-        - google-fight
-        - google
-        - kicker
-        - last-spoke
-        # requires a database & table
-        # - memo
-        - nick-info
-        - pun
-        - rss
-        - russian-roulette
-        - sample
-        - spell
-        - translate
-        - twitter
-        - url-summary
-        - web-scrape
-
-If you're going to use twitter you also need to configure it:
+If you're going to use the Twitter plugin you also need to configure it:
 
     cp mathetes-twitter.yaml.sample mathetes-twitter.yaml
 
-Right now it's username and password, maybe you can fork it and make it use oauth instead?  It's only using it to *pull* though...
+## Running
 
-    ---
-    username: TwitterUsername
-    password: twitterpassword
-
-## Running it
-
-    ruby -rubygems -Iexternal/silverplatter-irc/lib -Iexternal/silverplatter-log/lib -Ilib irc-bot.rb
+    ruby -rubygems -Ipath/to/silverplatter-irc/lib -Ipath/to/silverplatter-log/lib -Ilib irc-bot.rb
