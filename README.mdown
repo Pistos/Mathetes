@@ -1,0 +1,56 @@
+## Installing
+
+Clone the repository:
+
+  git clone git://github.com/Pistos/Mathetes.git ~/code/Mathetes
+  
+Pull in some requirements:
+
+[silverplatter-irc](http://github.com/apeiros/silverplatter-irc)
+  git clone git://github.com/apeiros/silverplatter-irc.git ~/code/Mathetes/external/silverplatter-irc
+  
+[silverplatter-log](git://github.com/apeiros/silverplatter-irc.git)
+  git clone git://github.com/apeiros/silverplatter-log.git ~/code/Mathetes/external/silverplatter-log
+  
+[mvfeed](http://gist.github.com/40396)
+  git clone git://gist.github.com/40396.git ~/code/Mathetes/external/mvfeed
+  
+
+## Configuring
+
+  cp methetes-config.yaml.sample methetes-config.yaml
+
+You'll want to change things like nick, password and channels for starters.
+
+  ---
+  nick: your_bot
+  password: 'thesecretpassword'
+  channels:
+      - name: '#some_channel'
+        ops: true
+      - name: '#some_other_channel'
+  plugins:
+      # chanstats is broken atm
+      # - chanstats
+      - convert
+      - dictionary
+      - down-for-me
+      - etymology
+      - github-hook
+      - google
+      - google-fight
+      - kicker
+      - last-spoke
+      - memo
+      - pun
+      - rss
+      - russian-roulette
+      - sample
+      - spell
+      - twitter
+      - url-summary
+
+
+## Running it
+
+  ruby -rubygems -Iexternal/silverplatter-irc/lib -Iexternal/silverplatter-log/lib -Iexternal/mvfeed -Ilib irc-bot.rb
