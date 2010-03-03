@@ -51,7 +51,7 @@ module Mathetes; module Plugins
       @seen ||= Hash.new
       s = ( @seen[ destination ] ||= Hash.new )
       if ! s[ rev ]
-        $mathetes.say( message, destination )
+        $mathetes.say( message.gsub( "\n", ' ' ), destination )
         s[ rev ] = true
       end
     end
