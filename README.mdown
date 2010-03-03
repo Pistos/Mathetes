@@ -21,7 +21,14 @@ Pull in some requirements:
 And it's expected to be mvfeed.rb so we'll just rename it:
 
 `mv ~/code/Mathetes/external/mvfeed/feed.rb ~/code/Mathetes/external/mvfeed/mvfeed.rb`
-  
+
+We also need to install some gems:
+
+  sudo gem install eventmachine
+  sudo gem install mash -v 0.0.3
+  sudo gem install httparty -v 0.4.3
+  sudo gem install m4dbi
+  sudo gem install dbd-pg
 
 ## Configuring
 
@@ -48,7 +55,8 @@ You'll want to change things like nick, password and channels for starters.
       - google-fight
       - kicker
       - last-spoke
-      - memo
+      # memo requires a database table, we'll tackle that later, skipping for now
+      # - memo
       - pun
       - rss
       - russian-roulette
@@ -61,7 +69,7 @@ If you're going to use twitter you also need to configure it:
 
 `cp mathetes-twitter.yaml.sample mathetes-twitter.yaml`
 
-Right now it's username and password, maybe you can fork it and make it use oauth instead?
+Right now it's username and password, maybe you can fork it and make it use oauth instead?  It's only using it to *pull* though...
 
   ---
   username: TwitterUsername
