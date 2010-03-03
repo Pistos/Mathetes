@@ -76,8 +76,9 @@ If you're going to use twitter you also need to configure it:
 
 Right now it's username and password, maybe you can fork it and make it use oauth instead?  It's only using it to pull though...
 
-`username: TwitterUsername`
-`password: twitterpassword`
+  ---
+  username: TwitterUsername
+  password: twitterpassword
 
 ## Running it
 
