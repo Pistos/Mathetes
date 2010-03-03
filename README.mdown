@@ -17,6 +17,10 @@ Pull in some requirements:
 [mvfeed](http://gist.github.com/40396)
 
 `git clone git://gist.github.com/40396.git ~/code/Mathetes/external/mvfeed`
+
+And it's expected to be mvfeed.rb so we'll just rename it:
+
+`mv ~/code/Mathetes/external/mvfeed/feed.rb ~/code/Mathetes/external/mvfeed/mvfeed.rb`
   
 
 ## Configuring
@@ -65,4 +69,4 @@ Right now it's username and password, maybe you can fork it and make it use oaut
 
 ## Running it
 
-  ruby -rubygems -Iexternal/silverplatter-irc/lib -Iexternal/silverplatter-log/lib -Iexternal/mvfeed -Ilib irc-bot.rb
+`ruby -rubygems -Iexternal/silverplatter-irc/lib -Iexternal/silverplatter-log/lib -Iexternal/mvfeed -Ilib irc-bot.rb`
