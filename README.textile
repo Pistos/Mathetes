@@ -6,15 +6,15 @@ Clone the repository:
   
 Pull in some requirements:
 
-[silverplatter-irc]http://github.com/apeiros/silverplatter-irc
+"silverplatter-irc":http://github.com/apeiros/silverplatter-irc
 
 @git clone git://github.com/apeiros/silverplatter-irc.git ~/code/Mathetes/external/silverplatter-irc@
 
-[silverplatter-log]git://github.com/apeiros/silverplatter-irc.git
+"silverplatter-log":git://github.com/apeiros/silverplatter-irc.git
 
 @git clone git://github.com/apeiros/silverplatter-log.git ~/code/Mathetes/external/silverplatter-log@
   
-[mvfeed]http://gist.github.com/40396
+"mvfeed":http://gist.github.com/40396
 
 @git clone git://gist.github.com/40396.git ~/code/Mathetes/external/mvfeed@
 
@@ -24,13 +24,13 @@ And it's expected to be mvfeed.rb so we'll just rename it:
 
 We also need to install some gems:
 
-bc.
-
+<pre><code>
   sudo gem install eventmachine
   sudo gem install mash -v 0.0.3
   sudo gem install httparty -v 0.4.3
   sudo gem install m4dbi
   sudo gem install dbd-pg
+</code></pre>
 
 h2. Configuring
 
