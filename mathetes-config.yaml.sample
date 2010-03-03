@@ -1,26 +1,33 @@
 ---
-nick: Mathetes
+nick: YourBotsNick
 password: 'thesecretpassword'
 channels:
     - name: '#mathetes'
       ops: true
     - name: '#ramaze'
 plugins:
-    - chanstats
-    - convert
-    - dictionary
-    - down-for-me
-    - etymology
-    - github-hook
-    - google
-    - google-fight
-    - kicker
-    - last-spoke
-    - memo
-    - pun
-    - rss
-    - russian-roulette
-    - sample
-    - spell
-    - twitter
-    - url-summary
+  - channel-util
+  # currently broken
+  # - chanstats
+  - convert
+  - dictionary
+  - down-for-me
+  - etymology
+  - github-hook
+  - google-fight
+  - google
+  - kicker
+  - last-spoke
+  # needs a database
+  # - memo
+  - nick-info
+  - pun
+  - rss
+  - russian-roulette
+  - sample
+  - spell
+  - translate
+  - twitter
+  - url-summary
+  - web-scrape
+

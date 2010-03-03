@@ -11,9 +11,13 @@ module Mathetes; module Plugins
     FEEDS = {
       'http://forum.webbynode.com/rss.php' => {
         :channels => [ '#webbynode', ],
-        :interval => 60,
+        :interval => 60 * 30,
       },
       'http://blog.webbynode.com/feed/rss/' => {
+        :channels => [ '#webbynode', ],
+        :interval => 60 * 60,
+      },
+      'http://status.webbynode.com/feed/' => {
         :channels => [ '#webbynode', ],
         :interval => 60 * 60,
       },
