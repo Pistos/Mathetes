@@ -100,7 +100,7 @@ module Mathetes; module Plugins
         # [ $1.to_i(16) ].pack( 'U*' )
       # }
       REXML::Text::unnormalize(
-        text.gsub( /&\#\d{3,};/, '?' )
+        text.gsub( /&\#\d{3,};/, '?' ).gsub( /\n/, ' ' )
         # converted
       )
       # ).gsub( /[^a-zA-Z0-9,.;:&\#@'!?\/ ()_-]/, '' )
