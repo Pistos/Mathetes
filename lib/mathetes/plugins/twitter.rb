@@ -132,7 +132,7 @@ module Mathetes; module Plugins
       text = clean_text( tweet[ 'text' ] )
       alert = "[\00300twitter\003] <#{src}> #{text}"
       channels.each do |channel|
-        if ! @seen[ channel ].include?( tweet_id )
+        if ! @seen[ channel ].include?( tweet_id ) && text !~ /^RT /
           @mathetes.say alert, channel
           @seen[ channel ] << tweet_id
           lang, tr = translate( text )
