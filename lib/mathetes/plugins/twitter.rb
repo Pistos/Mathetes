@@ -20,7 +20,7 @@ module Mathetes; module Plugins
       'ramaze' => [ '#ramaze', ],
       'ruby dbi' => [ '#ruby-dbi', ],
       'webbynode' => [ '#webbynode', ],
-      'rvm -@h4rvm1 -#h4rvm1 -skate -skateboard -skateboarding -music -@RoyaleVideo -shoe -car' => [ '#rvm', ],
+      'rvm -@h4rvm1 -#h4rvm1 -@h4rvm1_bot -skate -skateboard -skateboarding -music -@RoyaleVideo -shoe -car' => [ '#rvm', ],
       'nanoc -moritaya -virtualdjradio -warong1' => [ '#nanoc', ],
     }
 
