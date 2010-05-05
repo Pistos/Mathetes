@@ -1,7 +1,6 @@
 mathetes.pid
 mathetes-twitter.yaml
 mathetes-config.yaml
-lastspoke-start.pstore
-lastspoke.pstore
+*.pstore
 chanstats*.dat
 github-bad-data*
