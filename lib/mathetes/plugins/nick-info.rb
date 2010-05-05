@@ -13,7 +13,7 @@ module Mathetes; module Plugins
 
     include Mathetes::Traited
     trait( :nicks => Hash.new { |h,k|
-      h[ k ] = new_nick_rec( k, Time.now - CHECK_INTERVAL )
+      h[ k.downcase ] = new_nick_rec( k, Time.now - CHECK_INTERVAL )
     } )
 
     def self.new_nick_rec( nick, time_checked = Time.now )
@@ -21,15 +21,19 @@ module Mathetes; module Plugins
     end
 
     def self.[]( nick )
-      trait[ :nicks ][ nick ]
+      trait[ :nicks ][ nick.downcase ]
+    end
+
+    def self.[]=( nick, value )
+      trait[ :nicks ][ nick.downcase ] = value
     end
 
     def self.registered?( nick )
-      trait[ :nicks ][ nick ].registered
+      trait[ :nicks ][ nick.downcase ].registered
     end
 
     def self.identified?( nick )
-      trait[ :nicks ][ nick ].identified
+      trait[ :nicks ][ nick.downcase ].identified
     end
 
     def initialize( mathetes )
@@ -61,7 +65,7 @@ module Mathetes; module Plugins
       case message.text
       when /^Information on .{0,5}?([!-~]+)/
         n = $1
-        @nick_current = class_trait[ :nicks ][ n ] = NickInfo.new_nick_rec( n )
+        @nick_current = NickInfo[ n ] = NickInfo.new_nick_rec( n )
       when /^([!-~]+) is not registered/
         @nick_current = nil
       when /^Registered : /
