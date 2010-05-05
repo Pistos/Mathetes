@@ -62,9 +62,9 @@ module Mathetes
       end
     end
 
-    def part_channels
+    def part_channels( channels = nil )
       if @irc.connected?
-        channels = @irc.channels.channels
+        channels ||= @irc.channels.channels
         @irc.send_part 'Parting.', *channels
       end
       channels || []
