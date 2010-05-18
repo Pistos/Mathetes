@@ -38,6 +38,7 @@ module Mathetes; module Plugins
       'ramaze-wiki-pages'       => [ '#mathetes', '#ramaze' ],
       'ruby-dbi'                => [ '#mathetes', '#ruby-dbi', ],
       'rvm'                     => [ '#rvm', ],
+      'rvm-site'                => [ '#rvm', ],
       'selfmarks'               => [ '#mathetes', ],
       'sociar'                  => [ '#ramaze' ],
       'Thankful-Eyes'           => [ '#mathetes', ],
