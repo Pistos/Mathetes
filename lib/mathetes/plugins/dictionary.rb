@@ -27,7 +27,7 @@ module Mathetes; module Plugins
 
           output = ""
 
-          syllabification = doc.at( 'h3.headword.syl' ).text
+          syllabification = doc.at( '.syl' ).text.strip
 
           # parts of speech
           poses = []
