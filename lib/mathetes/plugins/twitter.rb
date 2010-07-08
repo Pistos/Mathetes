@@ -19,6 +19,7 @@ module Mathetes; module Plugins
     SEARCHES = {
       'ramaze' => [ '#ramaze', ],
       'ruby dbi' => [ '#ruby-dbi', ],
+      'rdbi' => [ '#ruby-dbi', ],
       'webbynode' => [ '#webbynode', ],
       'rvm -@h4rvm1 -#h4rvm1 -@h4rvm1_bot -skate -skateboard -skateboarding -music -@RoyaleVideo -shoe -car' => [ '#rvm', ],
       'nanoc -moritaya -virtualdjradio -warong1' => [ '#nanoc', ],
