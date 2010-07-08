@@ -140,15 +140,18 @@ module Mathetes; module Plugins
         doc            = Nokogiri::HTML( open( $1 ) )
 
         project        = $2
-        commit_message = doc.css( 'div.human div.message pre' )[ 0 ].content
+        commit_message = doc.css( 'div.human div.message pre' )[ 0 ].content.delete("\n")
         author         = doc.css( 'div.human div.name a')[ 0 ].content
 
         number_files            = {}
-        number_files[:modified] = doc.css( 'div#toc ul li.modified' ).size
-        number_files[:added]    = doc.css( 'div#toc ul li.added'    ).size
-        number_files[:removed]  = doc.css( 'div#toc ul li.removed'  ).size
+        number_files[:modified] = doc.css( '#toc td.status.modified' ).size
+        number_files[:added]    = doc.css( '#toc td.status.added'    ).size
+        number_files[:removed]  = doc.css( '#toc td.status.removed'  ).size
+        number_files[:renamed]  = doc.css( '#toc td.status.renamed'  ).size
 
-        s = "[\00300github\003] [#{project}] <#{author}> #{commit_message} {+#{number_files[ :added ]}/-#{number_files[ :removed ]}/*#{number_files[ :modified ]}}"
+        s = "[\00300github\003] [%s] <%s> %s {+%s/-%s/*%s/\342\206\272%s}" %
+          [project, author, commit_message, *number_files.values_at(:added, :removed, :modified, :renamed)]
+
         message.answer s
       when %r|(http://(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]+(?:/[0-9a-zA-Z#{"\303\244-\303\256"}~!@#%&./?=_+-]*)?)|u
         summary = summarize_url( $1 )
