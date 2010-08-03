@@ -25,6 +25,7 @@ module Mathetes; module Plugins
       'github'                  => [ '#mathetes' ],
       'hashpipe'                => [ '#ruby-dbi', ],
       'hoptoad-notifier-ramaze' => [ '#mathetes', '#ramaze' ],
+      'ideone-gem'              => [ '#mathetes', ],
       'innate'                  => [ '#mathetes', '#ramaze', ],
       'linistrac'               => [ '#mathetes', '#ramaze', ],
       'm4dbi'                   => [ '#mathetes', '#ruby-dbi', ],
