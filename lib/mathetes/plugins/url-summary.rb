@@ -150,7 +150,7 @@ module Mathetes; module Plugins
         number_files[:removed]  = doc.css( '#toc td.status.removed'  ).size
         number_files[:renamed]  = doc.css( '#toc td.status.renamed'  ).size
 
-        s = "[\00300github\003] [%s] <%s> %s {+%s/-%s/*%s/\342\206\272%s}" %
+        s = "[\00300github\003] [%s] <%s> %s {files +%s/-%s/~%s/mv%s}" %
           [project, author, commit_message, *number_files.values_at(:added, :removed, :modified, :renamed)]
 
         message.answer s
