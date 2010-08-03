@@ -102,7 +102,7 @@ module Mathetes; module Plugins
           throw :done  if ! CHANNELS.find { |c| c.downcase == channel.name.downcase }
 
           WATCHLIST.each do |watch_nick, watchlist|
-            next  if ! watch_nick === nick
+            next  if ! ( watch_nick === nick )
 
             watchlist.each do |watch|
               watch[ :regexps ].each do |r|
