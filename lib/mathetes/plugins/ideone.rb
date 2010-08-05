@@ -4,15 +4,23 @@ module Mathetes; module Plugins
 
   class Ideone
 
-    MAX_RESULT_LENGTH = 300   # characters
+    MAX_RESULT_LENGTH = 256   # characters
 
     def initialize( mathetes )
-      mathetes.hook_privmsg( :regexp => /^!(?:ruby|rb|python|py|perl|pl|php)\b/ ) do |message|
+      mathetes.hook_privmsg( :regexp => /^!(?:ruby|rb|rbp|python|py|perl|pl|php)\b/ ) do |message|
         message.text =~ /^!(\S+)\s+(.*)/
         lang_, code = $1, $2
         case lang_
           when 'ruby', 'rb'
             lang = :ruby
+          when 'rbp'
+            lang = :ruby
+            code = %{
+              def print_wrapper__
+                #{code}
+              end
+              print print_wrapper__.inspect
+            }
           when 'python', 'py'
             lang = :python
           when 'perl', 'pl'
