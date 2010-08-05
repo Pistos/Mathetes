@@ -128,6 +128,9 @@ module Mathetes
       @irc.read_loop do |message|
         case message.symbol
         when :PRIVMSG, :NOTICE
+          next  if @conf[ 'ignores' ].find { |ignored_nick|
+            message && message.from && SilverPlatter::IRC::Hostmask.new( ignored_nick, "*", "*", @irc ) =~ message.from
+          }
           @hooks[ message.symbol ].each do |h|
             if h.regexp.nil? || h.regexp =~ message.text
               h.call( message )
