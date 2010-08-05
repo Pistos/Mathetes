@@ -30,4 +30,5 @@ plugins:
   - twitter
   - url-summary
   - web-scrape
-
+ignores:
+    - SomeOtherBot
