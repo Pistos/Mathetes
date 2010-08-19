@@ -172,7 +172,7 @@ module Mathetes; module Plugins
           end
         when 'list'
           if args[ 1 ].nil?
-            message.answer "#{BANG_COMMAND} list <github repo name|#channel>"
+            message.answer "#{BANG_COMMAND} list <github repo name | #channel>"
           else
             @repos.transaction do
               r = @repos[ args[1] ]
