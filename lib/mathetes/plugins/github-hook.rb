@@ -165,7 +165,7 @@ module Mathetes; module Plugins
             @repos.transaction do
               repo = args[ 1 ]
               @repos[ repo ] ||= Array.new
-              channel = args[ 2 ] || message.channel.name
+              channel = ( args[ 2 ] || message.channel.name ).downcase
               @repos[ repo ] << channel
               message.answer "#{channel} subscribed to github repository #{repo}."
             end
@@ -198,10 +198,11 @@ module Mathetes; module Plugins
             message.answer "#{BANG_COMMAND} #{args[0]} <github repo name> [#channel]"
           else
             @repos.transaction do
-              repo = @repos[ args[1] ]
-              channel = args[2] || message.channel.name
-              if repo
-                if repo.delete( channel )
+              repo = args[1]
+              channels = @repos[ repo ]
+              channel = ( args[2] || message.channel.name ).downcase
+              if channels && channels.any?
+                if channels.delete( channel )
                   message.answer "#{channel} unsubscribed from github repository #{repo}."
                 else
                   message.answer "#{channel} not subscribed to github repository #{repo}?"
