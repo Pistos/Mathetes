@@ -7,6 +7,7 @@ require 'json'
 require 'open-uri'
 require 'cgi'
 require 'eventmachine'
+require 'mutex-pstore'
 
 module Mathetes; module Plugins
 
@@ -137,7 +138,12 @@ module Mathetes; module Plugins
   end
 
   class GitHubHookReceiver
+
+    BANG_COMMAND = '!github'
+
     def initialize( mathetes )
+      @repos = MuPStore.new( "github-repos.pstore" )
+
       mathetes.new_thread do
         loop do
           EventMachine::run do
@@ -146,7 +152,69 @@ module Mathetes; module Plugins
           $stderr.puts "*** EventMachine died; restarting ***"
         end
       end
+
+      mathetes.hook_privmsg( :regexp => /^#{BANG_COMMAND}\b/ ) do |message|
+        args = message.text[ /^\S+\s+(.*)/, 1 ]
+        break  if args.strip.empty?
+        args = args.split( /\s+/ )
+        case args[ 0 ]
+        when 'add', 'sub', 'subscribe'
+          if args[ 1 ].nil?
+            message.answer "#{BANG_COMMAND} #{args[0]} <github repo name> [#channel]"
+          else
+            @repos.transaction do
+              repo = args[ 1 ]
+              @repos[ repo ] ||= Array.new
+              channel = args[ 2 ] || message.channel.name
+              @repos[ repo ] << channel
+              message.answer "#{channel} subscribed to github repository #{repo}."
+            end
+          end
+        when 'list'
+          if args[ 1 ].nil?
+            message.answer "#{BANG_COMMAND} list <github repo name|#channel>"
+          else
+            @repos.transaction do
+              r = @repos[ args[1] ]
+              if r
+                message.answer r.join( ' ' )
+              else
+                repos = []
+                @repos.roots.each do |k|
+                  if @repos[k].include?( args[1] )
+                    repos << @repos[k]
+                  end
+                end
+                if repos.any?
+                  message.answer repos.map { |r| r[0] }.join( ', ' )
+                else
+                  message.answer "No github hook subscriptions found."
+                end
+              end
+            end
+          end
+        when 'delete', 'del', 'rm', 'remove', 'unsub', 'unsubscribe'
+          if args[1].nil?
+            message.answer "#{BANG_COMMAND} #{args[0]} <github repo name> [#channel]"
+          else
+            @repos.transaction do
+              repo = @repos[ args[1] ]
+              channel = args[2] || message.channel.name
+              if repo
+                if repo.delete( channel )
+                  message.answer "#{channel} unsubscribed from github repository #{repo}."
+                else
+                  message.answer "#{channel} not subscribed to github repository #{repo}?"
+                end
+              else
+                message.answer "#{channel} not subscribed to github repository #{repo}?"
+              end
+            end
+          end
+        end
+      end
     end
+
   end
 
 end; end
