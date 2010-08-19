@@ -90,7 +90,8 @@ module Mathetes; module Plugins
 
       repo = hash[ 'repository' ][ 'name' ]
       owner = hash[ 'repository' ][ 'owner' ][ 'name' ]
-      channels = REPOS[ repo ]
+      repos = MuPStore.new( 'github-repos.pstore' )
+      repos.transaction { @channels = repos[ repo ] }
 
       commits = hash[ 'commits' ]
 
@@ -104,11 +105,11 @@ module Mathetes; module Plugins
           url = zepto_url( cdata[ 'url' ] )
           text = "[\00300github\003] [\00303#{repo}\003] <\00307#{author}\003> #{message} #{url}"
 
-          if channels.nil? || channels.empty?
+          if @channels.nil? || @channels.empty?
             $mathetes.say "Unknown repo: '#{repo}'", '#mathetes'
             $mathetes.say text, '#mathetes'
           else
-            channels.each do |channel|
+            @channels.each do |channel|
               say_rev cdata[ 'id' ], text, channel
             end
           end
@@ -121,8 +122,8 @@ module Mathetes; module Plugins
         authors = commits.map { |c| c[ 'author' ][ 'name' ] }.uniq
         shas = commits.map { |c| c[ 'id' ] }
         first_url = zepto_url( commits[ 0 ][ 'url' ] )
-        if channels
-          channels.each do |channel|
+        if @channels
+          @channels.each do |channel|
             @seen ||= Hash.new
             s = ( @seen[ channel ] ||= Hash.new )
             shas.each do |sha|
