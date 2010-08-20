@@ -16,7 +16,7 @@ module Mathetes; module Plugins
         }
         haiku_lines.each do |line|
           sleep 3
-          message.answer line.center( width )
+          message.answer( '     ' + line.center( width ) )
         end
       end
     end
