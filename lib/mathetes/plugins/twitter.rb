@@ -25,6 +25,7 @@ module Mathetes; module Plugins
       'rvm -@h4rvm1 -#h4rvm1 -@h4rvm1_bot -skate -skateboard -skateboarding -music -@RoyaleVideo -shoe -car' => [ '#rvm', ],
       'nanoc -moritaya -virtualdjradio -warong1' => [ '#nanoc', ],
     }
+    POLL_INTERVAL = 180 # seconds
 
     def initialize( mathetes )
       @mathetes = mathetes
@@ -53,7 +54,7 @@ module Mathetes; module Plugins
         loop do
           poll_timeline
           poll_searches
-          sleep 60
+          sleep POLL_INTERVAL
         end
       end
     end
