@@ -66,7 +66,7 @@ module Mathetes; module Plugins
     end
 
     def zepto_url( url )
-      URI.parse( 'http://zep.purepistos.net/zep/1?uri=' + CGI.escape( url ) ).read
+      URI.parse( 'http://z.pist0s.ca/zep/1?uri=' + CGI.escape( url ) ).read
     end
 
     def say_item( uri, item, channels )
