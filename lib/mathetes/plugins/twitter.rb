@@ -25,6 +25,10 @@ module Mathetes; module Plugins
       'nanoc -moritaya -virtualdjradio -warong1' => [ '#nanoc', ],
     }
     POLL_INTERVAL = 180 # seconds
+    FILTERS = [
+      /^RT /,
+      /rubysoftwaredevelopment\.com/,
+    ]
 
     def initialize( mathetes )
       @mathetes = mathetes
@@ -132,9 +136,14 @@ module Mathetes; module Plugins
       tweet_id = tweet[ 'id' ].to_i
       src = tweet[ 'from_user' ]
       text = clean_text( tweet[ 'text' ] )
+      if FILTERS.find { |f| f =~ text }
+        $stderr.puts "[twitter] Filtered: #{text}"
+        return
+      end
+
       alert = "[\00300twitter\003] <#{src}> #{text}"
       channels.each do |channel|
-        if ! @seen[ channel ].include?( tweet_id ) && text !~ /^RT /
+        if ! @seen[ channel ].include?( tweet_id )
           @mathetes.say alert, channel
           @seen[ channel ] << tweet_id
           lang, tr = translate( text )
