@@ -22,7 +22,6 @@ module Mathetes; module Plugins
       'rdbi' => [ '#ruby-dbi', ],
       'm4dbi' => [ '#ruby-dbi', ],
       'webbynode' => [ '#webbynode', ],
-      'rvm -@h4rvm1 -#h4rvm1 -@h4rvm1_bot -skate -skateboard -skateboarding -music -@RoyaleVideo -shoe -car' => [ '#rvm', ],
       'nanoc -moritaya -virtualdjradio -warong1' => [ '#nanoc', ],
     }
     POLL_INTERVAL = 180 # seconds
