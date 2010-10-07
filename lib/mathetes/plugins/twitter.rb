@@ -28,6 +28,7 @@ module Mathetes; module Plugins
     FILTERS = [
       /^RT /,
       /rubysoftwaredevelopment\.com/,
+      /ramaze ruby developers - http:/,
     ]
 
     def initialize( mathetes )
