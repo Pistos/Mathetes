@@ -37,6 +37,10 @@ module Mathetes; module Plugins
         :channels => [ '#nanoc', ],
         :interval => 5 * 60,
       },
+      'http://groups.google.com/group/diaspora-dev/feed/rss_v2_0_msgs.xml' => {
+        :channels => [ '#diaspora-dev' ],
+        :interval => 15 * 60,
+      },
     }
 
     def initialize( mathetes )
