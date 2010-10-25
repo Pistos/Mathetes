@@ -108,7 +108,7 @@ module Mathetes; module Plugins
           if @channels.nil? || @channels.empty?
             $mathetes.say "Unknown repo: '#{repo}'", '#mathetes'
             $mathetes.say text, '#mathetes'
-          else
+          elsif message !~ /^Merge (?:remote )?branch /
             @channels.each do |channel|
               say_rev cdata[ 'id' ], text, channel
             end
