@@ -91,7 +91,7 @@ module Mathetes; module Plugins
               if url.length > 28
                 url = zepto_url( item.link )
               end
-              alert = "[\00300rss\003] #{author}#{item.title} - #{url}"
+              alert = "[\00300rss\003] #{author}#{item.title} - #{url}".gsub( /\n/, '' )
             end
             @mathetes.say alert, channel
           end
