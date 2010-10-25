@@ -130,7 +130,7 @@ module Mathetes; module Plugins
         %r{http://www\.pivotaltracker\.com/story},
         %r{http://\d+\.\d+\.\d+\.\d+}
         # Blacklist; swallow and discard
-      when %r{twitter\.com/\w+/status(?:es)?/(\d+)}
+      when %r{twitter\.com/(?:#!/)?\w+/status(?:es)?/(\d+)}
         open( "http://twitter.com/statuses/show/#{$1.to_i}.json" ) do |http|
           json = http.read
           tweet = JSON.parse( json )
