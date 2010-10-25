@@ -29,6 +29,7 @@ module Mathetes; module Plugins
       /^RT /,
       /rubysoftwaredevelopment\.com/,
       /ramaze ruby developers - http:/,
+      /Kantor PCP RDBI/,
     ]
 
     def initialize( mathetes )
