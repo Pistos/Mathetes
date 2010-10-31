@@ -22,23 +22,29 @@ def escape_quotes( s )
 end
 
 module Mathetes
+  DO_LOAD_CONF = true
+  DONT_LOAD_CONF = false
+
   class IRCBot
     def initialize
+      @conf = YAML.load_file 'mathetes-config.yaml'
       @irc = SilverPlatter::IRC::Connection.new(
-        "irc.freenode.net",
+        @conf['server']['host'],
         :log => SilverPlatter::Log.to_console( :formatter => SilverPlatter::Log::ColoredDebugConsole )
       )
-      reset
+      reset DONT_LOAD_CONF
       puts "Initialized."
     end
 
-    def reset
+    def reset( load_conf = DO_LOAD_CONF )
       puts "Resetting..."
 
       kill_threads
       unsubscribe_listeners
       parted = part_channels
-      @conf = YAML.load_file 'mathetes-config.yaml'
+      if load_conf
+        @conf = YAML.load_file 'mathetes-config.yaml'
+      end
       initialize_hooks
       initialize_plugins
       join_channels parted
