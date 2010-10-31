@@ -24,21 +24,23 @@ end
 module Mathetes
   class IRCBot
     def initialize
+      @conf = YAML.load_file 'mathetes-config.yaml'
       @irc = SilverPlatter::IRC::Connection.new(
-        "irc.freenode.net",
+        @conf[ 'server' ],
         :log => SilverPlatter::Log.to_console( :formatter => SilverPlatter::Log::ColoredDebugConsole )
       )
-      reset
+      # Don't reload the config here: we just did that four lines up
+      reset(false)
       puts "Initialized."
     end
 
-    def reset
+    def reset(conf = true)
       puts "Resetting..."
 
       kill_threads
       unsubscribe_listeners
       parted = part_channels
-      @conf = YAML.load_file 'mathetes-config.yaml'
+      @conf = YAML.load_file 'mathetes-config.yaml' if conf
       initialize_hooks
       initialize_plugins
       join_channels parted

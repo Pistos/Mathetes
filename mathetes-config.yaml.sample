@@ -1,4 +1,5 @@
 ---
+server: irc.freenode.net
 nick: YourBotsNick
 password: 'thesecretpassword'
 channels:
