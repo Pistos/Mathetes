@@ -22,7 +22,7 @@ module Mathetes; module Plugins
       'rdbi' => [ '#ruby-dbi', ],
       'm4dbi' => [ '#ruby-dbi', ],
       'webbynode' => [ '#webbynode', ],
-      'nanoc -moritaya -virtualdjradio -warong1' => [ '#nanoc', ],
+      'nanoc -moritaya -virtualdjradio -warong1 -Clarsss' => [ '#nanoc', ],
     }
     POLL_INTERVAL = 180 # seconds
     FILTERS = [
@@ -30,6 +30,7 @@ module Mathetes; module Plugins
       /rubysoftwaredevelopment\.com/,
       /ramaze ruby developers - http:/,
       /Kantor PCP RDBI/,
+      /NanoC/,
     ]
 
     def initialize( mathetes )
