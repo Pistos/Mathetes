@@ -61,7 +61,7 @@ module Mathetes; module Plugins
             if reversal && ! reversal.strip.empty?
               message.answer "HA!  In Soviet Russia, #{reversal} YOU!"
             else
-              message.answer "Nothing like that happens in Soviet Russia."
+              message.answer "Stuff like that actually happens in Soviet Russia."
             end
           rescue Exception => e
             message.answer e.message
@@ -82,7 +82,7 @@ module Mathetes; module Plugins
             begin
               reversal = RussianReversal.reverse( message.text )
               if reversal && ! reversal.strip.empty?
-                message.answer "HA!  In Soviet Russia, #{reversal} YOU!"
+                message.answer "Ha!  In Soviet Russia, #{reversal} YOU!"
                 @channels[channel][:last] = Time.now.to_i
               else
                 $stderr.puts %{No SR for "#{message}"}
