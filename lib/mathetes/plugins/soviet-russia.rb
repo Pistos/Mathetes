@@ -91,8 +91,10 @@ module Mathetes; module Plugins
                 $stderr.puts %{No SR for "#{message}"}
               end
             rescue Exception => e
-              $stderr.puts e.message
-              $stderr.puts e.backtrace.join("\n\t")
+              if e.message !~ /sentence has no linkages/
+                $stderr.puts e.message
+                $stderr.puts e.backtrace.join("\n\t")
+              end
             end
           end
         end
