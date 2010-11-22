@@ -32,6 +32,9 @@ module Mathetes; module Plugins
       end
 
       mathetes.hook_privmsg( :regexp => /^#{BANG_COMMAND}\b/ ) do |message|
+        nick = message.from.nick
+        break  if IGNORED.include?( nick )
+
         args = message.text[ /^\S+\s+(.*)/, 1 ]
         break  if args.strip.empty?
         args = args.split( /\s+/ )
