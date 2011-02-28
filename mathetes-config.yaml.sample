@@ -28,6 +28,7 @@ plugins:
   - russian-roulette
   - sample
   - spell
+  - time
   - translate
   - twitter
   - url-summary
