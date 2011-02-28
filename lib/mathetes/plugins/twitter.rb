@@ -18,11 +18,13 @@ module Mathetes; module Plugins
     }
     SEARCHES = {
       'ramaze' => [ '#ramaze', ],
-      'ruby dbi' => [ '#ruby-dbi', ],
-      'rdbi' => [ '#ruby-dbi', ],
-      'm4dbi' => [ '#ruby-dbi', ],
+      'm4dbi' => [ '#mathetes', ],
       'webbynode' => [ '#webbynode', ],
       'nanoc -moritaya -virtualdjradio -warong1 -Clarsss' => [ '#nanoc', ],
+      'datamapper' => [ '#datamapper', ],
+      '@sinatra' => [ '#sinatra', ],
+      'hackety hack OR @hacketyhack' => [ '#hacketyhack', ],
+      # 'joindiaspora' => [ '#diaspora-dev', ],
     }
     POLL_INTERVAL = 180 # seconds
     FILTERS = [
