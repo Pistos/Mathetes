@@ -29,7 +29,7 @@ module Mathetes; module Plugins
         handle_join message
       end
 
-      @dbh = DBI.connect( "DBI:Pg:reby-memo", "memo", "memo" )
+      @dbh = DBI.connect( "DBI:Pg:reby-memo:localhost", "memo", "memo" )
     end
 
     def memos_for( recipient )
