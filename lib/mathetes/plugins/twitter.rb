@@ -96,7 +96,7 @@ module Mathetes; module Plugins
         if fetched[ 'max_id' ].to_i > last_id
           @last_search_id[ search_term ] = fetched[ 'max_id' ].to_i
           fetched[ 'results' ].each do |tweet|
-            say_search_tweet tweet, channels
+            say_search_tweet search_term, tweet, channels
           end
         end
       end
@@ -138,7 +138,7 @@ module Mathetes; module Plugins
       end
     end
 
-    def say_search_tweet( tweet, channels = [ 'Pistos' ] )
+    def say_search_tweet( search_term, tweet, channels = [ 'Pistos' ] )
       tweet_id = tweet[ 'id' ].to_i
       src = tweet[ 'from_user' ]
       text = clean_text( tweet[ 'text' ] )
@@ -147,7 +147,7 @@ module Mathetes; module Plugins
         return
       end
 
-      alert = "[\00300twitter\003] <#{src}> #{text}"
+      alert = "[\00300twitter\003] [#{search_term[0..15]}] <#{src}> #{text}"
       channels.each do |channel|
         if ! @seen[ channel ].include?( tweet_id )
           @mathetes.say alert, channel
