@@ -33,6 +33,7 @@ module Mathetes; module Plugins
       /ramaze ruby developers - http:/,
       /Kantor PCP RDBI/,
       /NanoC/,
+      %r|\.[a-z]{2,3}/rdbi|i,
     ]
 
     def initialize( mathetes )
