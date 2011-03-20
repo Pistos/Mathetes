@@ -57,8 +57,8 @@ module Mathetes; module Plugins
         :channels => [ '#sinatra' ],
         :interval => 15 * 60,
       },
-      '' => {
-        :channels => [ '#hacketyhack' ],
+      'http://groups.google.com/group/rubyversionmanager/feed/rss_v2_0_msgs.xml' => {
+        :channels => [ '#rvm' ],
         :interval => 15 * 60,
       },
     }
