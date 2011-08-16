@@ -18,9 +18,9 @@ module Mathetes; module Plugins
     }
     SEARCHES = {
       'ramaze' => [ '#ramaze', ],
-      'm4dbi' => [ '#mathetes', ],
+      'm4dbi -from:m4dbi' => [ '#mathetes', ],
       'webbynode' => [ '#webbynode', ],
-      'nanoc -moritaya -virtualdjradio -warong1 -Clarsss' => [ '#nanoc', ],
+      'nanoc -virtualdjradio -warong1 -Clarsss -ss86_nanoc -ipod' => [ '#nanoc', ],
       'datamapper' => [ '#datamapper', ],
       '@sinatra' => [ '#sinatra', ],
       'hackety hack OR @hacketyhack' => [ '#hacketyhack', ],
