@@ -103,7 +103,7 @@ module Mathetes; module Plugins
           author = cdata[ 'author' ][ 'name' ]
           message = cdata[ 'message' ].gsub( /\s+/, ' ' )[ 0..384 ]
           url = zepto_url( cdata[ 'url' ] )
-          text = "[\00300github\003] [\00303#{repo}\003] <\00307#{author}\003> #{message} #{url}"
+          text = "[\00304github\003] [\00303#{repo}\003] <\00307#{author}\003> #{message} #{url}"
 
           if @channels.nil? || @channels.empty?
             $mathetes.say "Unknown repo: '#{repo}'", '#mathetes'
