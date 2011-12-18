@@ -20,7 +20,7 @@ module Mathetes; module Plugins
       'ramaze' => [ '#ramaze', ],
       'm4dbi -from:m4dbi' => [ '#mathetes', ],
       'webbynode' => [ '#webbynode', ],
-      'nanoc -virtualdjradio -warong1 -Clarsss -ss86_nanoc -ipod' => [ '#nanoc', ],
+      'nanoc lang:en -virtualdjradio -warong1 -Clarsss -ss86_nanoc -ipod' => [ '#nanoc', ],
       'datamapper' => [ '#datamapper', ],
       '@sinatra' => [ '#sinatra', ],
       'hackety hack OR @hacketyhack' => [ '#hacketyhack', ],
