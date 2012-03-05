@@ -4,7 +4,7 @@
 
 ### Ubuntu Prerequisites
 
-    sudo apt-get install ruby rubygems
+    sudo apt-get install ruby ruby-dev rubygems
 
 ### Plugin Prerequisites
 
