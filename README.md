@@ -4,7 +4,7 @@
 
 ### Ubuntu Prerequisites
 
-    sudo apt-get install ruby ruby-dev
+    sudo apt-get install ruby ruby-dev libpq-dev
 
 Install the latest rubygems (not from the repository).  Visit rubygems.org and download the latest and then run...
 
