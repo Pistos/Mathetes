@@ -2,6 +2,12 @@
 
 ## Installing
 
+### Ubuntu Prerequisites
+
+    sudo apt-get install ruby rubygems
+
+### Plugin Prerequisites
+
 Clone the repository:
 
     git clone git://github.com/Pistos/Mathetes.git
