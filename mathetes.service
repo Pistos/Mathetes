@@ -1,0 +1,178 @@
+#!/bin/bash
+#(03:17:05 PM) Sarteck: http://www.clubbleach.org/forums/showthread.php?92129-Alchemist-Chat-Thread&p=4780193&viewfull=1#post4780193
+# (03:29:25 PM) Sarteck: Nah, not as root, just as a regular user.  :P
+# (03:29:29 PM) Sarteck: Oh
+# (03:29:30 PM) Sarteck: Oh
+# (03:29:33 PM) Sarteck: Um
+# (03:29:42 PM) Sarteck: Could you please include in the script
+# (03:29:50 PM) Sarteck: EXPORT MALLOC_CHECK=4
+# (03:30:14 PM) Sarteck: Not sure why, but I have to do that before EggDrop runs after I updated a few months ago.%s
+
+
+
+#########
+#settings for eggdrop service script
+#with any settings do not leave and trailing semicolons (;)
+#########
+
+#service name
+SERVICE_NAME="Mathetes bot"
+
+#full path to service binary
+SERVICE_BIN="/usr/local/Mathetes/run.sh"
+
+#leave blank to run service as root user, otherwise start service by specifying a user
+USER="mathetes"
+
+#if left blank then script runs normally.  otherwise it will cd to the directory and then start the service.
+WORKING_DIRECTORY="/usr/local/Mathetes/"
+
+#specify any special actions to run before any other command, multiple commands separated by semicolon
+CMD_START=""
+
+#where would you like logging from the output of the service script to happen?
+#if left blank it will log to /dev/null
+CONSOLE="log_mathetes.log"
+
+#location of the PID file 
+PIDFILE="/usr/local/Mathetes/mathetes.pid"
+
+
+
+
+#########
+#end of settings, do not edit beyon this point
+#########
+
+#This comment block is for RedHat systems integration compatibility
+# chkconfig: 2345 0 0
+# description: eggdrop chkconfig compatibility
+### BEGIN INIT INFO
+# Provides: eggdrop
+# Defalt-Start: 2 3 4 5
+# Short-Description: start and stop eggdrop
+# Description: eggdrop chkconfig compatibility
+
+
+#import service functions, the script can be extended to use them if you want in the future
+#Debian only
+if [ -f /lib/lsb/init-functions ]; then
+. /lib/lsb/init-functions
+fi
+#Redhat like distros only
+if [ -f /etc/rc.d/init.d/functions ]; then
+. /etc/rc.d/init.d/functions
+fi
+#NOTE! Neither of the above includes are used in this script, I included them if you wanted
+#to optionally modify the script
+
+if [ "$UID" != "0" ];then  # Will the real "root" please stand up?
+  echo "$0 service must be controlled by root!"
+  exit 1
+fi
+
+#how are we gonna subit?
+if [ -z "$USER" ]; then
+  SUBIT="su - -c "
+else
+  SUBIT="su - $USER -c "
+fi
+
+if [ ! -z "$WORKING_DIRECTORY" ];then
+  if [ ! -z "$CMD_START" ];then
+    CMD_START="$CMD_START;cd $WORKING_DIRECTORY"
+  else
+    CMD_START="cd $WORKING_DIRECTORY"
+  fi
+fi
+
+if [ -z $CONSOLE ];then
+  CONSOLE="/dev/null"
+fi
+
+#custom functions for starting and stopping the service
+start() {
+  #this is to stop the service from being an asshole
+  if [ -e "$PIDFILE" ];then
+    mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+  fi
+  if [ ! -z $mypid ];then
+    echo "$SERVICE_NAME is already running.  Stop trying to start shit."
+    status
+    exit 1
+  fi
+  #echo "CMD_START = $CMD_START;$SERVICE_BIN >>$CONSOLE 2>&1 &"
+  $SUBIT "$CMD_START;$SERVICE_BIN >>$CONSOLE 2>&1 &" 
+  sleep 2
+  if [ -e "$PIDFILE" ];then
+    mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+    if [ ! -z "$mypid" ];then
+      echo "$SERVICE_NAME has been started."
+    else
+      echo "$SERVICE_NAME has failed to start."
+      rm -f $PIDFILE
+    fi
+  else
+    echo "$SERVICE_NAME has failed to start."
+  fi
+}
+
+wait() { #wait for boogy and woogy to close before finishing up any commands
+  while true;do
+    if [ -e "$PIDFILE" ];then
+      mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+    fi
+    if [ -z $mypid ];then
+      return 0
+    else
+      sleep 1
+      echo -n "."
+    fi
+  done
+}
+
+status() {
+  if [ -e "$PIDFILE" ];then
+    mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+  fi
+  if [ ! -z $mypid ];then
+    echo "$SERVICE_NAME is running."
+  else
+    echo "$SERVICE_NAME is dead."
+  fi
+}
+
+stop() {
+  #Sam's custom kill command for jboss
+  kill -s 15 $(cat $PIDFILE) 2> /dev/null
+  stopcode="$?"
+  if [ "$stopcode" -eq "0" ];then
+    echo -n "$SERVICE_NAME is stopping."
+    wait && echo "       SUCCESS!"
+  else
+    echo "$SERVICE_NAME has not been started."
+  fi
+  if [ -e "$PIDFILE" ];then
+    rm -f $PIDFILE;
+  fi
+}
+
+#here is where all the magic happens for starting, stopping and whatnot
+case "$1" in
+start)
+  start
+  ;;
+stop)
+  stop
+  ;;
+status)
+  status
+  ;;
+restart)
+  stop
+  start
+  ;;
+*)
+  echo "usage: $0 (start|stop|status|restart|help)"
+esac
+
