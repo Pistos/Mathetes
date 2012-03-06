@@ -48,15 +48,14 @@ Install postgresql and import the database.
 Change the password for postgres user in the psql database and create a new user and database for memo.  The following are SQL commands for psql after logging into the database as the postgres user.
 
     \password postgres
-    CREATE DATABASE rubymemo;
     CREATE USER memo;
     \password memo
-    GRANT ALL PRIVILEGES ON DATABASE rubymemo TO memo;
+    ALTER USER memo WITH CREATEDB;
     \q
 
 Now we need to import the database (not SQL any more).
 
-    psql
+    psql -h localhost -U memo -d postgres < schema-memo.sql
 
 ## Configuring
 
