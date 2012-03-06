@@ -18,7 +18,6 @@ module Mathetes; module Plugins
     PUBLIC_READING_THRESHOLD = 2
 
     def initialize( mathetes )
-      print "step 1"
       @mathetes = mathetes
       @mathetes.hook_privmsg(
         :regexp => /^!memo\b/
@@ -32,8 +31,6 @@ module Mathetes; module Plugins
         handle_join message
       end
 
-      print "step 2"
-      #@dbh = DBI.connect( "DBI:PostgreSQL:rubymemo:localhost", "memo", "memo" )
       @dbh = M4DBI.connect("PostgreSQL", :database => "rubymemo", :username => 'memo', :hostname => 'localhost', :password => 'memo' )
     end
 
@@ -58,7 +55,6 @@ module Mathetes; module Plugins
     end
 
     def record_memo( privmsg )
-      print "Step 3"
       args = privmsg.text[ /^\S+\s+(.*)/, 1 ]
 
       sender = nick = privmsg.from.nick

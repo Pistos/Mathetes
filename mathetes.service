@@ -32,7 +32,7 @@ CMD_START=""
 
 #where would you like logging from the output of the service script to happen?
 #if left blank it will log to /dev/null
-CONSOLE=""
+CONSOLE="log_mathetes.log"
 
 #location of the PID file 
 PIDFILE="/usr/local/Mathetes/mathetes.pid"
@@ -93,21 +93,35 @@ fi
 #custom functions for starting and stopping the service
 start() {
   #this is to stop the service from being an asshole
-  mypid=`ps $(cat $PIDFILE) 2>/dev/null | grep $(cat $PIDFILE) 2>/dev/null | awk '{print $1}'`
+  if [ -e "$PIDFILE" ];then
+    mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+  fi
   if [ ! -z $mypid ];then
     echo "$SERVICE_NAME is already running.  Stop trying to start shit."
     status
     exit 1
   fi
-  echo "CMD_START = $CMD_START;$SERVICE_BIN >$CONSOLE 2>&1 &"
-  $SUBIT "$CMD_START;$SERVICE_BIN >$CONSOLE 2>&1 &" 
-  sleep 1
-  status
+  #echo "CMD_START = $CMD_START;$SERVICE_BIN >>$CONSOLE 2>&1 &"
+  $SUBIT "$CMD_START;$SERVICE_BIN >>$CONSOLE 2>&1 &" 
+  sleep 2
+  if [ -e "$PIDFILE" ];then
+    mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+    if [ ! -z "$mypid" ];then
+      echo "$SERVICE_NAME has been started."
+    else
+      echo "$SERVICE_NAME has failed to start."
+      rm -f $PIDFILE
+    fi
+  else
+    echo "$SERVICE_NAME has failed to start."
+  fi
 }
 
 wait() { #wait for boogy and woogy to close before finishing up any commands
   while true;do
-    mypid=`ps $(cat $PIDFILE) 2>/dev/null | grep $(cat $PIDFILE) 2>/dev/null | awk '{print $1}'`
+    if [ -e "$PIDFILE" ];then
+      mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+    fi
     if [ -z $mypid ];then
       return 0
     else
@@ -118,7 +132,9 @@ wait() { #wait for boogy and woogy to close before finishing up any commands
 }
 
 status() {
-  mypid=`ps $(cat $PIDFILE) 2>/dev/null | grep $(cat $PIDFILE) 2>/dev/null | awk '{print $1}'`
+  if [ -e "$PIDFILE" ];then
+    mypid=`ps $(cat $PIDFILE) | grep $(cat $PIDFILE) | awk '{print $1}'`
+  fi
   if [ ! -z $mypid ];then
     echo "$SERVICE_NAME is running."
   else
