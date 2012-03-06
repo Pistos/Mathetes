@@ -1,4 +1,6 @@
+require 'rubygems'
 require 'm4dbi'
+require 'rdbi-driver-postgresql'
 
 module Mathetes; module Plugins
 
@@ -16,6 +18,7 @@ module Mathetes; module Plugins
     PUBLIC_READING_THRESHOLD = 2
 
     def initialize( mathetes )
+      print "step 1"
       @mathetes = mathetes
       @mathetes.hook_privmsg(
         :regexp => /^!memo\b/
@@ -29,7 +32,9 @@ module Mathetes; module Plugins
         handle_join message
       end
 
-      @dbh = DBI.connect( "DBI:Pg:rubymemo:localhost", "memo", "memo" )
+      print "step 2"
+      #@dbh = DBI.connect( "DBI:PostgreSQL:rubymemo:localhost", "memo", "memo" )
+      @dbh = M4DBI.connect("PostgreSQL", :database => "rubymemo", :username => 'memo', :hostname => 'localhost', :password => 'memo' )
     end
 
     def memos_for( recipient )
@@ -53,6 +58,7 @@ module Mathetes; module Plugins
     end
 
     def record_memo( privmsg )
+      print "Step 3"
       args = privmsg.text[ /^\S+\s+(.*)/, 1 ]
 
       sender = nick = privmsg.from.nick
@@ -65,7 +71,7 @@ module Mathetes; module Plugins
 
       if recipient =~ %r{^/(.*)/$}
         recipient_regexp = Regexp.new $1
-        @dbh.do(
+        @dbh.execute(
           "INSERT INTO memos ( sender, recipient_regexp, message ) VALUES ( ?, ?, ? )",
           sender,
           recipient_regexp.source,
@@ -76,7 +82,7 @@ module Mathetes; module Plugins
         if memos_for( recipient ).size >= MAX_MEMOS_PER_PERSON
           privmsg.answer "The inbox of #{recipient} is full."
         else
-          @dbh.do(
+          @dbh.execute(
             "INSERT INTO memos ( sender, recipient, message ) VALUES ( ?, ?, ? )",
             sender,
             recipient,
@@ -109,7 +115,7 @@ module Mathetes; module Plugins
           age.gsub( /^(.*)(\d+):(\d+):(\d+)/, "\\1 \\2h \\3m \\4s" )
         end
         @mathetes.say( "#{nick}: [#{age} ago] <#{memo['sender']}> #{memo['message']}", dest )
-        @dbh.do(
+        @dbh.execute(
           "UPDATE memos SET time_told = NOW() WHERE id = ?",
           memo[ 'id' ]
         )
